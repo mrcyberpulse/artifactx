@@ -7,7 +7,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base, TimestampMixin, new_uuid
 from app.core.timeutil import utcnow
-from app.modules.users.models import User
 
 
 class Role(str, Enum):
@@ -31,6 +30,10 @@ class Workspace(Base, TimestampMixin):
         Uuid, ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
 
+    memberships: Mapped[list["WorkspaceMembership"]] = relationship(
+        back_populates="workspace", cascade="all, delete-orphan"
+    )
+
 
 class WorkspaceMembership(Base):
     __tablename__ = "workspace_memberships"
@@ -51,4 +54,4 @@ class WorkspaceMembership(Base):
         DateTime(timezone=True), default=utcnow, nullable=False
     )
 
-    workspace: Map
+    workspace: Mapped["Workspace"] = relationship(back_populates="memberships")
