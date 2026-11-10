@@ -1,0 +1,11 @@
+[project]
+name = "artifactx-backend"
+version = "1.0.0"
+description = "ArtifactX Community Edition API (created by Harsh Saini, MR CYBER)"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
