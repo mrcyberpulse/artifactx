@@ -40,7 +40,7 @@ export function Sidebar() {
       <div className="border-t border-border px-4 py-3 text-xs text-muted">
         ArtifactX v1.0.0
         <br />
-        Created by Harsh Saini (MR CYBER)
+        Created by  MR Cyber Pulse (Harsh saini)
       </div>
     </aside>
   );
