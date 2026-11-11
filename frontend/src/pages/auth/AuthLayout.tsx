@@ -15,7 +15,7 @@ export function AuthLayout({ title, subtitle, children }: { title: string; subti
           {children}
         </div>
         <p className="mt-6 text-center text-xs text-muted">
-          ArtifactX v1.0.0 | Created by Harsh Saini (MR CYBER)
+          ArtifactX v1.0.0 | Created by MR Cyber Pulse (Harsh saini)
         </p>
       </div>
     </div>
