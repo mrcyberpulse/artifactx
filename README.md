@@ -9,13 +9,13 @@ Created by **MR Cyber Pulse** (https://github.com/mrcyberpulse)) · Licensed und
 
 ## Features in this release
 
-- User registration, login, logout, password reset (architecture), rate limiting
-- JWT access tokens (in-memory on the frontend) + rotating refresh tokens with reuse detection
+- User registration, login, logout, password reset (architecture), rate limiting.
+- JWT access tokens (in-memory on the frontend) + rotating refresh tokens with reuse detection.
 - Workspaces with role-based membership (owner/admin/member/viewer)
-- Project CRUD with search, filter, and pagination
-- Workspace-isolated audit logging
+- Project CRUD with search, filter, and pagination.
+- Workspace-isolated audit logging.
 - Health check endpoint (DB + Redis)
-- Dashboard with real project metrics; other metrics show honest "coming soon" states
+- Dashboard with real project metrics; other metrics show honest "coming soon" states.
 - Full dark cybersecurity GUI with all 14 planned sidebar sections (9 are placeholders)
 
 ## Technology stack
