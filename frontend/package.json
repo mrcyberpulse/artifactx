@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "ArtifactX Community Edition \u2014 Open-Source SBOM Intelligence Platform. Created by Harsh Saini (MR CYBER).",
+  "description": "ArtifactX Community Edition — Open-Source SBOM Intelligence Platform. Created by MR Cyber Pulse (Harsh saini).",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
