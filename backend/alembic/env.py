@@ -12,7 +12,8 @@ from app.modules.audit import models as audit_models  # noqa: F401
 from app.modules.projects import models as projects_models  # noqa: F401
 from app.modules.users import models as users_models  # noqa: F401
 from app.modules.workspaces import models as workspaces_models  # noqa: F401
-from app.modules.sbom import models as sbom_models  # noqa: F401  <-- YE LINE PART 2 KE LIYE ZARURI HAI
+from app.modules.sbom import models as sbom_models  # noqa: F401
+from app.modules.vulnerabilities import models as vuln_models # NAYA ADD HUA
 
 config = context.config
 config.set_main_option("sqlalchemy.url", get_settings().database_url)
