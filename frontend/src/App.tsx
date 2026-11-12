@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/" element={<OverviewPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
-          
+          <Route path="/vulnerabilities" element={<VulnerabilityPage />} />
           {/* Yahan humne ComingSoon ko hata kar asli pages lagaye hain */}
           <Route path="/sbom-inventory" element={<SBOMInventoryPage />} />
           <Route path="/components" element={<ComponentsPage />} />
