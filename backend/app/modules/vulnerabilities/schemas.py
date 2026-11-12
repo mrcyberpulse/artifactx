@@ -23,11 +23,25 @@ class FindingOut(BaseModel):
     risk_factors: dict[str, Any]
     advisory: AdvisoryOut
 
+class RemediationTaskCreate(BaseModel):
+    finding_id: uuid.UUID
+    title: str
+    description: str | None = None
+    priority: str = "medium"
+    due_date: datetime | None = None
+
+class RemediationTaskUpdate(BaseModel):
+    status: str | None = None
+    priority: str | None = None
+    assignee_id: uuid.UUID | None = None
+
 class RemediationTaskOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: uuid.UUID
     finding_id: uuid.UUID
     title: str
+    description: str | None
     status: str
     priority: str
     due_date: datetime | None
+    created_at: datetime
