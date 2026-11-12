@@ -4,7 +4,6 @@ import { WorkspaceProvider } from "@/features/workspace/WorkspaceContext";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { ComingSoon } from "@/components/ComingSoon";
-import { VulnerabilityPage } from "@/pages/VulnerabilityPage";
 
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
@@ -16,9 +15,11 @@ import { SettingsPage } from "@/pages/SettingsPage";
 import { AboutPage } from "@/pages/AboutPage";
 import { NoWorkspacePage } from "@/pages/NoWorkspacePage";
 
-// Naye SBOM Pages ke imports
+// Naye Pages
 import { SBOMInventoryPage } from "@/pages/sbom/SBOMInventoryPage";
 import { ComponentsPage } from "@/pages/components/ComponentsPage";
+import { VulnerabilityPage } from "@/pages/VulnerabilityPage";
+import { RemediationPage } from "@/pages/RemediationPage";
 
 export default function App() {
   return (
@@ -37,18 +38,20 @@ export default function App() {
           <Route path="/" element={<OverviewPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
-          <Route path="/vulnerabilities" element={<VulnerabilityPage />} />
-          {/* Yahan humne ComingSoon ko hata kar asli pages lagaye hain */}
+          
+          {/* Working Pages */}
           <Route path="/sbom-inventory" element={<SBOMInventoryPage />} />
           <Route path="/components" element={<ComponentsPage />} />
+          <Route path="/vulnerabilities" element={<VulnerabilityPage />} />
+          <Route path="/remediation" element={<RemediationPage />} />
           
-          <Route path="/vulnerabilities" element={<ComingSoon title="Vulnerability Intelligence" />} />
+          {/* Coming Soon Pages */}
           <Route path="/risk-analytics" element={<ComingSoon title="Risk Analytics" />} />
           <Route path="/dependency-graph" element={<ComingSoon title="Dependency Graph" />} />
           <Route path="/license-intelligence" element={<ComingSoon title="License Intelligence" />} />
-          <Route path="/remediation" element={<ComingSoon title="Remediation Center" />} />
           <Route path="/reports" element={<ComingSoon title="Reports" />} />
           <Route path="/notifications" element={<ComingSoon title="Notifications" />} />
+          
           <Route path="/audit-logs" element={<AuditLogsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/about" element={<AboutPage />} />
