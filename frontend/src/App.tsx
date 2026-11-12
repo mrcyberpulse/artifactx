@@ -4,6 +4,7 @@ import { WorkspaceProvider } from "@/features/workspace/WorkspaceContext";
 import { ProtectedRoute } from "@/components/layout/ProtectedRoute";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { ComingSoon } from "@/components/ComingSoon";
+import { VulnerabilityPage } from "@/pages/VulnerabilityPage";
 
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
