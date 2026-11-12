@@ -90,3 +90,43 @@ def run_mock_scan(db: Session, workspace_id: uuid.UUID, project_id: uuid.UUID) -
 
     db.commit()
     return findings_created
+# ... purana code (imports aur run_mock_scan) ...
+
+from app.modules.vulnerabilities.models import RemediationTask, Finding
+
+def create_remediation_task(db: Session, workspace_id: uuid.UUID, data: dict) -> RemediationTask:
+    task = RemediationTask(
+        workspace_id=workspace_id,
+        finding_id=data["finding_id"],
+        title=data["title"],
+        description=data.get("description"),
+        priority=data.get("priority", "medium"),
+        due_date=data.get("due_date"),
+    )
+    db.add(task)
+    db.commit()
+    db.refresh(task)
+    return task
+
+def list_remediation_tasks(db: Session, workspace_id: uuid.UUID) -> list[RemediationTask]:
+    return db.scalars(
+        select(RemediationTask)
+        .where(RemediationTask.workspace_id == workspace_id)
+        .order_by(RemediationTask.created_at.desc())
+    ).all()
+
+def update_remediation_task(db: Session, workspace_id: uuid.UUID, task_id: uuid.UUID, data: dict) -> RemediationTask | None:
+    task = db.scalar(select(RemediationTask).where(
+        RemediationTask.id == task_id, 
+        RemediationTask.workspace_id == workspace_id
+    ))
+    if not task:
+        return None
+    
+    for key, value in data.items():
+        if value is not None:
+            setattr(task, key, value)
+            
+    db.commit()
+    db.refresh(task)
+    return task
