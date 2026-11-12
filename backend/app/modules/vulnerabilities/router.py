@@ -18,7 +18,7 @@ def scan_project(
     ctx: WorkspaceContext = Depends(workspace_access(Role.member)),
     db: Session = Depends(get_db)
 ):
-    findings_count = vuln_service.run_mock_scan(db, ctx.workspace.id, project_id)
+    findings_count = vuln_service.run_scan(db, ctx.workspace.id, project_id)
     return {"message": "Scan complete", "findings_created": findings_count}
 
 @router.get("/findings", response_model=list[FindingOut])
