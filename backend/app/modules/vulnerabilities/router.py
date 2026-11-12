@@ -7,7 +7,8 @@ from app.core.deps import WorkspaceContext, workspace_access
 from app.modules.workspaces.models import Role
 from app.modules.vulnerabilities import service as vuln_service
 from app.modules.vulnerabilities.models import Finding
-from app.modules.vulnerabilities.schemas import FindingOut
+from app.modules.vulnerabilities.schemas import FindingOut, RemediationTaskCreate, RemediationTaskOut, RemediationTaskUpdate
+from app.core.errors import not_found
 
 router = APIRouter(prefix="/workspaces/{workspace_id}/vulnerabilities", tags=["Vulnerabilities"])
 
@@ -30,9 +31,6 @@ def list_findings(
     if project_id:
         stmt = stmt.where(Finding.project_id == project_id)
     return db.scalars(stmt.order_by(Finding.risk_score.desc())).all()
-# ... purana code (imports, scan_project, list_findings) ...
-
-from app.modules.vulnerabilities.schemas import RemediationTaskCreate, RemediationTaskOut, RemediationTaskUpdate
 
 @router.post("/remediation/tasks", response_model=RemediationTaskOut)
 def create_task(
@@ -58,6 +56,5 @@ def update_task(
 ):
     task = vuln_service.update_remediation_task(db, ctx.workspace.id, task_id, body.model_dump(exclude_unset=True))
     if not task:
-        from app.core.errors import not_found
         raise not_found("Task")
     return task
