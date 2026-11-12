@@ -15,6 +15,10 @@ import { SettingsPage } from "@/pages/SettingsPage";
 import { AboutPage } from "@/pages/AboutPage";
 import { NoWorkspacePage } from "@/pages/NoWorkspacePage";
 
+// Naye SBOM Pages ke imports
+import { SBOMInventoryPage } from "@/pages/sbom/SBOMInventoryPage";
+import { ComponentsPage } from "@/pages/components/ComponentsPage";
+
 export default function App() {
   return (
     <Routes>
@@ -32,8 +36,11 @@ export default function App() {
           <Route path="/" element={<OverviewPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
-          <Route path="/sbom-inventory" element={<ComingSoon title="SBOM Inventory" />} />
-          <Route path="/components" element={<ComingSoon title="Components" />} />
+          
+          {/* Yahan humne ComingSoon ko hata kar asli pages lagaye hain */}
+          <Route path="/sbom-inventory" element={<SBOMInventoryPage />} />
+          <Route path="/components" element={<ComponentsPage />} />
+          
           <Route path="/vulnerabilities" element={<ComingSoon title="Vulnerability Intelligence" />} />
           <Route path="/risk-analytics" element={<ComingSoon title="Risk Analytics" />} />
           <Route path="/dependency-graph" element={<ComingSoon title="Dependency Graph" />} />
