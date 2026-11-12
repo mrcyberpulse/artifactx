@@ -30,3 +30,34 @@ def list_findings(
     if project_id:
         stmt = stmt.where(Finding.project_id == project_id)
     return db.scalars(stmt.order_by(Finding.risk_score.desc())).all()
+# ... purana code (imports, scan_project, list_findings) ...
+
+from app.modules.vulnerabilities.schemas import RemediationTaskCreate, RemediationTaskOut, RemediationTaskUpdate
+
+@router.post("/remediation/tasks", response_model=RemediationTaskOut)
+def create_task(
+    body: RemediationTaskCreate,
+    ctx: WorkspaceContext = Depends(workspace_access(Role.member)),
+    db: Session = Depends(get_db)
+):
+    return vuln_service.create_remediation_task(db, ctx.workspace.id, body.model_dump())
+
+@router.get("/remediation/tasks", response_model=list[RemediationTaskOut])
+def list_tasks(
+    ctx: WorkspaceContext = Depends(workspace_access(Role.viewer)),
+    db: Session = Depends(get_db)
+):
+    return vuln_service.list_remediation_tasks(db, ctx.workspace.id)
+
+@router.patch("/remediation/tasks/{task_id}", response_model=RemediationTaskOut)
+def update_task(
+    task_id: uuid.UUID,
+    body: RemediationTaskUpdate,
+    ctx: WorkspaceContext = Depends(workspace_access(Role.member)),
+    db: Session = Depends(get_db)
+):
+    task = vuln_service.update_remediation_task(db, ctx.workspace.id, task_id, body.model_dump(exclude_unset=True))
+    if not task:
+        from app.core.errors import not_found
+        raise not_found("Task")
+    return task
