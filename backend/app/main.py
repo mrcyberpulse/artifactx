@@ -18,6 +18,7 @@ from app.modules.projects.router import router as projects_router
 from app.modules.settings_info.router import router as settings_info_router
 from app.modules.workspaces.router import router as workspaces_router
 from app.modules.sbom.router import router as sbom_router
+from app.modules.vulnerabilities.router import router as vuln_router # NAYA ADD HUA
 
 logging.basicConfig(level=logging.INFO)
 settings = get_settings()
@@ -56,3 +57,4 @@ app.include_router(projects_router, prefix=API_PREFIX)
 app.include_router(dashboard_router, prefix=API_PREFIX)
 app.include_router(audit_router, prefix=API_PREFIX)
 app.include_router(sbom_router, prefix=API_PREFIX)
+app.include_router(vuln_router, prefix=API_PREFIX) # NAYA ADD HUA
