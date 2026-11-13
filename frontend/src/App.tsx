@@ -34,9 +34,9 @@ export default function App() {
           <Route path="/vulnerabilities" element={<VulnerabilityPage />} />
           <Route path="/remediation" element={<RemediationPage />} />
           <Route path="/reports" element={<ReportsPage />} />
-          <Route path="/risk-analytics" element={<ComingSoon title="Risk Analytics" />} />
+          <Route path="/risk-analytics" element={<RiskAnalyticsPage />} />
           <Route path="/dependency-graph" element={<ComingSoon title="Dependency Graph" />} />
-          <Route path="/license-intelligence" element={<ComingSoon title="License Intelligence" />} />
+          <Route path="/license-intelligence" element={<LicensePage />} />
           <Route path="/notifications" element={<ComingSoon title="Notifications" />} />
           <Route path="/audit-logs" element={<AuditLogsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
