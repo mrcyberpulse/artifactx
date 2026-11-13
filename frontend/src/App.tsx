@@ -17,7 +17,8 @@ import { ComponentsPage } from "@/pages/components/ComponentsPage";
 import { VulnerabilityPage } from "@/pages/VulnerabilityPage";
 import { RemediationPage } from "@/pages/RemediationPage";
 import { ReportsPage } from "@/pages/ReportsPage";
-
+import { LicensePage } from "@/pages/LicensePage";
+import { RiskAnalyticsPage } from "@/pages/RiskAnalyticsPage";
 export default function App() {
   return (
     <Routes>
