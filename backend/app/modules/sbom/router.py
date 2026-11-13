@@ -254,3 +254,50 @@ def delete_import(
         summary={"filename": imp.source_filename},
     )
     db.commit()
+@router.get("/graph")
+def get_dependency_graph(
+    project_id: uuid.UUID,
+    ctx: WorkspaceContext = Depends(workspace_access(Role.viewer)),
+    db: Session = Depends(get_db)
+):
+    # Fetch all dependencies for this project
+    deps = db.scalars(
+        select(DependencyRelationship).where(
+            DependencyRelationship.workspace_id == ctx.workspace.id,
+            DependencyRelationship.project_id == project_id
+        )
+    ).all()
+
+    # Fetch components to get actual names for the nodes
+    comps = db.scalars(
+        select(Component).where(
+            Component.workspace_id == ctx.workspace.id,
+            Component.project_id == project_id
+        )
+    ).all()
+    
+    # Create a lookup dictionary: sbom_ref -> component name
+    comp_map = {c.sbom_ref: c.name for c in comps if c.sbom_ref}
+    
+    nodes = []
+    edges = []
+    added_nodes = set()
+
+    for dep in deps:
+        source_name = comp_map.get(dep.source_ref, dep.source_ref)
+        target_name = comp_map.get(dep.target_ref, dep.target_ref)
+
+        # Add source node
+        if source_name not in added_nodes:
+            nodes.append({"id": source_name, "label": source_name})
+            added_nodes.add(source_name)
+        
+        # Add target node
+        if target_name not in added_nodes:
+            nodes.append({"id": target_name, "label": target_name})
+            added_nodes.add(target_name)
+
+        # Add edge
+        edges.append({"source": source_name, "target": target_name})
+
+    return {"nodes": nodes, "edges": edges}
