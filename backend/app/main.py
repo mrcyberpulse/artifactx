@@ -11,6 +11,7 @@ from app.core.errors import (
 )
 from app.core.middleware import SecurityHeadersMiddleware
 from app.modules.audit.router import router as audit_router
+from app.modules.analytics.router import router as analytics_router
 from app.modules.auth.router import router as auth_router
 from app.modules.dashboard.router import router as dashboard_router
 from app.modules.health.router import router as health_router
@@ -60,3 +61,4 @@ app.include_router(audit_router, prefix=API_PREFIX)
 app.include_router(sbom_router, prefix=API_PREFIX)
 app.include_router(vuln_router, prefix=API_PREFIX)
 app.include_router(reports_router, prefix=API_PREFIX)
+app.include_router(analytics_router, prefix=API_PREFIX)
