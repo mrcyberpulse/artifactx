@@ -7,7 +7,7 @@ export const NAV_ITEMS = [
   { label: "Components", path: "/components", icon: Boxes, implemented: true },
   { label: "Vulnerability Intelligence", path: "/vulnerabilities", icon: ShieldAlert, implemented: true },
   { label: "Risk Analytics", path: "/risk-analytics", icon: LineChart, implemented: true },
-  { label: "Dependency Graph", path: "/dependency-graph", icon: GitBranch, implemented: false },
+  { label: "Dependency Graph", path: "/dependency-graph", icon: GitBranch, implemented: true },
   { label: "License Intelligence", path: "/license-intelligence", icon: ScrollText, implemented: true },
   { label: "Remediation Center", path: "/remediation", icon: Wrench, implemented: true },
   { label: "Reports", path: "/reports", icon: FileBarChart, implemented: true },
