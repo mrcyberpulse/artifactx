@@ -31,3 +31,53 @@ def export_csv(ctx: WorkspaceContext = Depends(workspace_access(Role.viewer)), d
         media_type="text/csv",
         headers={"Content-Disposition": f"attachment; filename=artifactx_report_{ctx.workspace.id}.csv"}
     )
+@router.get("/export/pdf")
+def export_pdf(ctx: WorkspaceContext = Depends(workspace_access(Role.viewer)), db: Session = Depends(get_db)):
+    findings = db.scalars(select(Finding).where(Finding.workspace_id == ctx.workspace.id).order_by(Finding.risk_score.desc())).all()
+    
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
+    styles = getSampleStyleSheet()
+
+    # Title
+    elements.append(Paragraph(f"ArtifactX Security Report - {ctx.workspace.name}", styles['Title']))
+    elements.append(Spacer(1, 12))
+    
+    # Summary
+    elements.append(Paragraph(f"Total Findings: {len(findings)}", styles['Heading2']))
+    elements.append(Spacer(1, 12))
+
+    # Table Data
+    data = [["CVE", "Severity", "Risk Score", "Status"]]
+    for f in findings:
+        data.append([
+            f.advisory.external_id, 
+            f.advisory.severity or "UNKNOWN", 
+            str(f.risk_score), 
+            f.status
+        ])
+
+    if len(data) > 1:
+        table = Table(data)
+        table.setStyle([
+            ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#171722')),
+            ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+            ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+            ('BOTTOMPADDING', (0,0), (-1,0), 12),
+            ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#f5f5f5')),
+            ('GRID', (0,0), (-1,-1), 1, colors.HexColor('#a1a1aa'))
+        ])
+        elements.append(table)
+    else:
+        elements.append(Paragraph("No vulnerabilities found.", styles['Normal']))
+
+    doc.build(elements)
+    buffer.seek(0)
+    
+    return Response(
+        content=buffer.getvalue(),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename=artifactx_report_{ctx.workspace.id}.pdf"}
+    )
