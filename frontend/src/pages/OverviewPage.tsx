@@ -65,7 +65,7 @@ export function OverviewPage() {
           <EmptyState
             icon={ShieldAlert}
             title="No vulnerability data yet"
-            description="Severity breakdown appears once SBOM scanning and vulnerability intelligence are available in a future release."
+            description="Severity breakdown appears once SBOM scanning and vulnerability intelligence are available."
           />
         </Card>
         <Card>
@@ -75,27 +75,7 @@ export function OverviewPage() {
           <EmptyState
             icon={AlertTriangle}
             title="No risk data yet"
-            description="Risk trend charts appear once the risk engine is available in a future release."
-          />
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Components by Ecosystem</CardTitle>
-          </CardHeader>
-          <EmptyState
-            icon={Boxes}
-            title="No component data yet"
-            description="Import an SBOM in a future release to see components grouped by ecosystem."
-          />
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Project Activity</CardTitle>
-          </CardHeader>
-          <EmptyState
-            icon={FolderKanban}
-            title="No activity yet"
-            description="Recent project and SBOM activity will appear here."
+            description="Risk trend charts appear once the risk engine is available."
           />
         </Card>
       </div>
