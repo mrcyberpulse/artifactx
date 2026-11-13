@@ -19,6 +19,7 @@ import { RemediationPage } from "@/pages/RemediationPage";
 import { ReportsPage } from "@/pages/ReportsPage";
 import { LicensePage } from "@/pages/LicensePage";
 import { RiskAnalyticsPage } from "@/pages/RiskAnalyticsPage";
+import { DependencyGraphPage } from "@/pages/DependencyGraphPage";
 export default function App() {
   return (
     <Routes>
@@ -35,7 +36,7 @@ export default function App() {
           <Route path="/remediation" element={<RemediationPage />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/risk-analytics" element={<RiskAnalyticsPage />} />
-          <Route path="/dependency-graph" element={<ComingSoon title="Dependency Graph" />} />
+          <Route path="/dependency-graph" element={<DependencyGraphPage />} />
           <Route path="/license-intelligence" element={<LicensePage />} />
           <Route path="/notifications" element={<ComingSoon title="Notifications" />} />
           <Route path="/audit-logs" element={<AuditLogsPage />} />
